@@ -7,7 +7,7 @@
 予備リンク： https://drive.google.com/file/d/12ynpp37xWIYNA31MNEyLZ1irOtfADT-x/view?usp=sharing
 
 # データセット
-[データセットサンプル（スクレイピング結果）]https://drive.google.com/file/d/1TcF6u2DwF3wiVebZEHVhH-aFhTujtYMk/view?usp=sharing  
+[データセットサンプル(スクレイピング結果)]https://drive.google.com/file/d/1TcF6u2DwF3wiVebZEHVhH-aFhTujtYMk/view?usp=sharing  
   
 予備リンク： https://drive.google.com/file/d/1TcF6u2DwF3wiVebZEHVhH-aFhTujtYMk/view?usp=sharing
 
