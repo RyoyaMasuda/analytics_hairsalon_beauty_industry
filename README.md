@@ -17,7 +17,7 @@
 
 ## 開発環境
 - ローカル： macOS Monterery
-- コンテナ： docker　compose, Dockerfile
+- コンテナ： dockercompose, Dockerfile
   - スクレイピング環境(scraping)
   - 分析環境(analysis)
 - 使用ライブラリ
