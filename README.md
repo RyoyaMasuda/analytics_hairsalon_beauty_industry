@@ -55,4 +55,3 @@
 - docker-compose.ymlファイルが最上位にあり、Dockerfile、requirements.txtはそれぞれのディレクトリ内にある。
 - 作業用ディレクトリは「root」とし、コンテナ内の「root」ディレクトリにマウントしている。
 - 「scrapingのdata」ディレクトリを「analysisのコンテナ内のdata」にマウントする設計にしている。
-  - 
