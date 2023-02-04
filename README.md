@@ -2,9 +2,9 @@
 ヘアサロン業界の口コミ分析(スクレイピング&自然言語)を実施した。
 
 # レポート
-[HPB口コミ分析結果(広島市中区)](https://drive.google.com/file/d/12ynpp37xWIYNA31MNEyLZ1irOtfADT-x/view?usp=sharing)  
+[HPB口コミ分析結果(広島市中区)](https://drive.google.com/file/d/1r2SSmXJ2qvom_KvRWFxEx-wkHeEO9NR-/view?usp=sharing)  
   
-予備リンク： https://drive.google.com/file/d/12ynpp37xWIYNA31MNEyLZ1irOtfADT-x/view?usp=sharing
+予備リンク： https://drive.google.com/file/d/1r2SSmXJ2qvom_KvRWFxEx-wkHeEO9NR-/view?usp=sharing
 
 # データセット
 [データセットサンプル(スクレイピング結果)](https://drive.google.com/file/d/1TcF6u2DwF3wiVebZEHVhH-aFhTujtYMk/view?usp=sharing)  
