@@ -51,9 +51,10 @@
         └── log
             └── scraping.log
 ```   
-- 今回は分析とスクレイピングの２つのコンテナ（scrapingとanalysis）をdocker-composeを使用して立ち上げた。
+- 今回は分析とスクレイピングの２つのコンテナ（`scraping`と`analysis`）をdocker-composeを使用して立ち上げた。
 - docker-compose.ymlファイルが最上位にあり、Dockerfile、requirements.txtはそれぞれのディレクトリ内にある。
 - 作業用ディレクトリは「root」とし、コンテナ内の「root」ディレクトリにマウントしている。
 - 「scrapingのdata」ディレクトリを「analysisのコンテナ内のdata」ディレクトリにマウントする設計にしている。
-  - スクレイピングで取得したデータは「scrapingのdata」に出力されると「analysisのコンテナ内のdata」にも現れる
-  - スクレイピングで取得したデータは「scrapingのdata」に出力され、「analysisのコンテナ内のdata」にも
+  - スクレイピングで取得したデータは「scrapingのdata」に出力され、「analysisのコンテナ内のdata」にも現れる。（サンプルファイル： hirosima_central.csv）
+  - analysys内のnotebookからdata/hirosima_central.csvを読み込んで
+│   └── root
