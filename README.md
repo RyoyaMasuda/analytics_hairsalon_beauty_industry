@@ -53,8 +53,7 @@
 ```   
 - 今回は分析とスクレイピングの２つのコンテナ（`scraping`と`analysis`）をdocker-composeを使用して立ち上げた。
 - docker-compose.ymlファイルが最上位にあり、Dockerfile、requirements.txtはそれぞれのディレクトリ内にある。
-- 作業用ディレクトリは「root」とし、コンテナ内の「root」ディレクトリにマウントしている。
-- 「scrapingのdata」ディレクトリを「analysisのコンテナ内のdata」ディレクトリにマウントする設計にしている。
+- 作業用ディレクトリは`root`とし、コンテナ内の`root`ディレクトリにマウントしている。
+- `scraping/data`を`analysisコンテナ内のroot/data`にマウントする設計にしている。
   - スクレイピングで取得したデータは「scrapingのdata」に出力され、「analysisのコンテナ内のdata」にも現れる。（サンプルファイル： hirosima_central.csv）
-  - analysys内のnotebookからdata/hirosima_central.csvを読み込んで
-│   └── root
+  - analysysコンテナ内の`/root/hpb_analysis.ipynb`から`data/hirosima_central.csv`を読み込んで分析を実施している。
