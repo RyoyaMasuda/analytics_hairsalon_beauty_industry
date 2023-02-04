@@ -28,7 +28,7 @@
   - MeCab
   - selenium
 
-#　ディレクトリ構成と各種処理
+ディレクトリ構成と各種処理
 ```
 .
 ├── docker-compose.yml
