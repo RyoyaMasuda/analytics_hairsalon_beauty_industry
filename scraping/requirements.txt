@@ -1,0 +1,4 @@
+requests==2.27.1
+selenium==3.141.
+chromedriver-binary==109.0.5414.74
+PyYAML

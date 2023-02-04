@@ -1,0 +1,27 @@
+version: "3" #現在のdockerのバージョン。基本的には3を指定する。
+services:
+  selenium_202302: # image名
+    restart: always
+    build:
+      context: ./scraping
+      dockerfile: ./Dockerfile
+    container_name: "selenium_202302"
+    working_dir: "/root"
+    tty: true # コンテナが永続できるようにする。falseにすると起動した瞬間に落ちる。
+    volumes:
+      - ./scraping/root/:/root/
+      - ./scraping/root/data:/root/data
+
+  mecab: # image名
+    restart: always
+    build:
+      context: ./analysis
+      dockerfile: ./Dockerfile
+    container_name: "mecab"
+    working_dir: "/root"
+    tty: true # コンテナが永続できるようにする。falseにすると起動した瞬間に落ちる。
+    volumes:
+      - ./analysis/root/:/root/
+      - ./scraping/root/data:/root/data/
+    ports:
+      - 6666:8888 # jupyte-labを起動する場合、ローカルのブラウザでlocalhost:6666」を指定すると繋がるように設定。
