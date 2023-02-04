@@ -58,5 +58,3 @@
   - スクレイピングで取得したデータは`scrapingコンテナの/root/data`に出力され、`analysisコンテナ内の/root/data`にも現れる。（サンプルファイル： hirosima_central.csv）
   - `analysysコンテナ内の/root/hpb_analysis.ipynb`から`data/hirosima_central.csv`を読み込んで分析を実施している。
 - `scraping/root/log/scraping.log`にサンプルファイル取得時のログ情報を出力した。（`scraping/root/config.yml`はログ出力設定ファイル）
-│       └── hpb_analysis.ipynb
-│       └── hpb_analysis.ipynb
