@@ -27,3 +27,26 @@
   - sklearn
   - MeCab
   - selenium
+
+#　ディレクトリ構成と各種処理
+```
+.
+├── docker-compose.yml
+├── analysis
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── root
+│       ├── data
+│       │   └── hirosima_central.csv
+│       └── hpb_analysis.ipynb
+└── scraping
+    ├── Dockerfile
+    ├── requirements.txt
+    └── root
+        ├── config.yml
+        ├── data
+        │   └── hirosima_central.csv
+        ├── hpb_scraping,py
+        └── log
+            └── scraping.log
+```   
