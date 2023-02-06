@@ -18,6 +18,7 @@
 ## 開発環境
 - ローカル： macOS Monterery
 - コンテナ： docker-compose, Dockerfile
+  - 言語: python3.9（dockerの公式imageを使用）
   - スクレイピング環境(scraping)
   - 分析環境(analysis)
 - 使用ライブラリ
