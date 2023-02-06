@@ -26,7 +26,18 @@ driver = webdriver.Chrome("/opt/chrome/chromedriver", options=options)
 
 # スクレイピングした情報を書き込むための新規ファイルを作成する関数。file_nameを最初に決める。(好きなファイル名で良いが拡張子は.csv)
 def make_save_file(file_name):
-    
+    """保存するcsvファイルを新規作成
+
+    Parameters
+    ----------
+    file_name : str
+        保存したいファイル名を指定
+
+    Returns
+    -------
+    str
+        保存するファイルパス
+    """
     # ファイルを保存するディレクトリが無ければ作成する。
     save_dir = "/root/data/" 
     if not os.path.exists(save_dir):
@@ -47,6 +58,15 @@ def make_save_file(file_name):
 # (指定ルールは「エリアから探す」の一番下の階層を指定する。例：総合トップ>美容院・美容室・ヘアサロン検索トップ>中国トップ>広島の美容院・美容室・ヘアサロン>袋町・中町・三川町・並木通りの美容院・美容室・ヘアサロン)
 # save_file_pathはmake_save_fileから返されたpathを指定する。
 def get_all_kuchikomi(area_url, save_file_path):
+    """指定したエリアの全てのサロンの全ての口コミを取得する。
+
+    Parameters
+    ----------
+    area_url : str
+        取得したいエリアのURLを指定する。
+    save_file_path : str
+        make_save_file関数で作成したファイルパスを指定する。
+    """
     driver.get(area_url)
     sleep(2)
         
@@ -79,7 +99,7 @@ def get_all_kuchikomi(area_url, save_file_path):
                 while True:
                         logger.debug(f"{i}ページの口コミを取得中")
 
-                        # 以下の関数で1ページ分の口コミを取得する。
+                        # 以下の関数で1ページ分の口コミを取得する。(別の関数として定義)
                         get_1page_kuchikomi_info(salon_name, save_file_path)
                     
                         # 口コミの次のページへ遷移
@@ -91,6 +111,7 @@ def get_all_kuchikomi(area_url, save_file_path):
                             break
             
             except Exception:
+                logger.info(f'No.{salon_num+1} サロン名: {salon_name} URL: {salon_url} には口コミは存在しなかった。')
                 continue
             
         # サロン一覧へ戻る。(1ページ目のみ「back_url」が使えないためif-else処理。)
@@ -104,6 +125,7 @@ def get_all_kuchikomi(area_url, save_file_path):
 
         # サロン一覧の次のページに進む。              
         try:
+            # 次のページに進む。(別の関数として定義)
             next_button()
             page += 1
         # 一番最後のページの次のページはないのでエラーになる。その場合処理を終了(正常終了)
@@ -112,7 +134,17 @@ def get_all_kuchikomi(area_url, save_file_path):
             sys.exit(0)
     
 # 口コミを1ページ分取得し、csvファイルに保存する関数。
-def get_1page_kuchikomi_info(salon_name, save_file_path): # all_salon_name=all_salon_a_text
+def get_1page_kuchikomi_info(salon_name, save_file_path):
+    """1ページ分を口コミを全て取得しファイルに1行ずつ書き込んでいく。(get_all_kuchikomi関数内で使用する関数)
+
+    Parameters
+    ----------
+    salon_name : str
+        サロン名を指定する。(get_all_kuchikomi関数内で取得するので特に意識しなくて良い。)
+    save_file_path : str
+        ファイルパスを指定する。(get_all_kuchikomi関数の引数として指定するので特に意識しなくて良い。)
+    """
+    
     # 口コミの枠を取得。
     kuchikomis = driver.find_elements_by_css_selector("li.reportCassette.mT30")
     
@@ -137,6 +169,8 @@ def get_1page_kuchikomi_info(salon_name, save_file_path): # all_salon_name=all_s
 
 #「次へ」ボタンを押す関数。(次のページに移る)
 def next_button():
+    """次のページに遷移する。(get_all_kuchikomi関数内で使用する関数)
+    """
     next_button = driver.find_element_by_xpath("//li[@class='pa top0 right0 afterPage']")
     next_button_url = next_button.find_element_by_tag_name("a").get_attribute("href")
     driver.get(next_button_url)
