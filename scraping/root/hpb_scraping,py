@@ -12,7 +12,7 @@ log_save_dir = "/root/log/"
 if not os.path.exists(log_save_dir):
     os.makedirs(log_save_dir)
 
-# ログ周りの設定
+# ログ周りの設定。config.ymlに全て記載してあり、読み込む。
 logger = getLogger(__name__)
 config.dictConfig(yaml.safe_load(open("config.yml").read()))
  
@@ -24,7 +24,6 @@ options.add_argument('--disable-gpu')
 options.add_argument('--no-sandbox')
 driver = webdriver.Chrome("/opt/chrome/chromedriver", options=options)
 
-# スクレイピングした情報を書き込むための新規ファイルを作成する関数。file_nameを最初に決める。(好きなファイル名で良いが拡張子は.csv)
 def make_save_file(file_name):
     """保存するcsvファイルを新規作成
 
@@ -37,7 +36,12 @@ def make_save_file(file_name):
     -------
     str
         保存するファイルパス
+    
+    Notes
+    -----
+    スクレイピングした情報を書き込むための新規ファイルを作成する関数。file_nameを最初に決める。(好きなファイル名で良いが拡張子は.csv)
     """
+    
     # ファイルを保存するディレクトリが無ければ作成する。
     save_dir = "/root/data/" 
     if not os.path.exists(save_dir):
@@ -54,9 +58,6 @@ def make_save_file(file_name):
     
     return save_file_path 
 
-# HotPepperBeautyの好きなエリアのurlを指定する。(サンプルとしてarea_url="https://beauty.hotpepper.jp/svcSF/macFA/salon/sacX151/")
-# (指定ルールは「エリアから探す」の一番下の階層を指定する。例：総合トップ>美容院・美容室・ヘアサロン検索トップ>中国トップ>広島の美容院・美容室・ヘアサロン>袋町・中町・三川町・並木通りの美容院・美容室・ヘアサロン)
-# save_file_pathはmake_save_fileから返されたpathを指定する。
 def get_all_kuchikomi(area_url, save_file_path):
     """指定したエリアの全てのサロンの全ての口コミを取得する。
 
@@ -66,6 +67,12 @@ def get_all_kuchikomi(area_url, save_file_path):
         取得したいエリアのURLを指定する。
     save_file_path : str
         make_save_file関数で作成したファイルパスを指定する。
+    
+    Notes
+    -----
+    HotPepperBeautyの好きなエリアのurlを指定する。(サンプルとしてarea_url="https://beauty.hotpepper.jp/svcSF/macFA/salon/sacX151/")
+    (指定ルールは「エリアから探す」の一番下の階層を指定する。例：総合トップ>美容院・美容室・ヘアサロン検索トップ>中国トップ>広島の美容院・美容室・ヘアサロン>袋町・中町・三川町・並木通りの美容院・美容室・ヘアサロン)
+    save_file_pathはmake_save_fileから返されたpathを指定する。
     """
     driver.get(area_url)
     sleep(2)
@@ -133,7 +140,6 @@ def get_all_kuchikomi(area_url, save_file_path):
             logger.info('すべての口コミを取得(正常終了)')
             sys.exit(0)
     
-# 口コミを1ページ分取得し、csvファイルに保存する関数。
 def get_1page_kuchikomi_info(salon_name, save_file_path):
     """1ページ分を口コミを全て取得しファイルに1行ずつ書き込んでいく。(get_all_kuchikomi関数内で使用する関数)
 
@@ -167,7 +173,6 @@ def get_1page_kuchikomi_info(salon_name, save_file_path):
             writer = csv.writer(f, lineterminator="\n")
             writer.writerow(csv_row)
 
-#「次へ」ボタンを押す関数。(次のページに移る)
 def next_button():
     """次のページに遷移する。(get_all_kuchikomi関数内で使用する関数)
     """
@@ -177,9 +182,15 @@ def next_button():
     sleep(2)
         
 def main():
+    # 他のエリアの口コミをスクレイピングした時はコマンドライン引数でfile_nameとarea_urlを指定する。
+    # file_name = sys.argv[1]
+    # area_url = sys.argv[2]
+    
     # 広島の中心エリアなのでファイル名は「hirosima_central.csv」としておく。
-    save_file_path = make_save_file(file_name = 'hirosima_central.csv')
-    get_all_kuchikomi(area_url='https://beauty.hotpepper.jp/svcSF/macFA/salon/sacX151/', save_file_path=save_file_path)
+    file_name = 'hirosima_central.csv'
+    area_url = 'https://beauty.hotpepper.jp/svcSF/macFA/salon/sacX151/'
+    save_file_path = make_save_file(file_name=file_name)
+    get_all_kuchikomi(area_url=area_url, save_file_path=save_file_path)
     
 if __name__ == '__main__':
     main()
