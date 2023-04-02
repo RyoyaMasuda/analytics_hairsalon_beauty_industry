@@ -48,14 +48,13 @@
         ├── config.yml
         ├── data
         │   └── hirosima_central.csv （GitHubリポジトリからは削除しておく。）
-        ├── hpb_scraping,py
+        ├── hpb_scraping.py
         └── log
             └── scraping.log
 ```   
-- 今回は分析とスクレイピングの２つのコンテナ（`scraping`と`analysis`）をdocker-composeを使用して立ち上げた。
-- docker-compose.ymlファイルが最上位にあり、Dockerfile、requirements.txtはそれぞれのディレクトリ内（`scraping`と`analysis`）にある。
-- 作業用ディレクトリは`root`とし、コンテナ内の`root`ディレクトリにマウントしている。
-- `scraping/root/data`を`analysisコンテナ内のroot/data`にマウントする設計にしている。(以下目的)
-  - スクレイピングで取得したデータは`scrapingコンテナの/root/data`に出力され、`analysisコンテナ内の/root/data`にも現れる。（サンプルファイル： hirosima_central.csv）
-  - `analysysコンテナ内の/root/hpb_analysis.ipynb`から`data/hirosima_central.csv`を読み込んで分析を実施している。
-- `scraping/root/log/scraping.log`にサンプルファイル取得時のログ情報を出力した。（`scraping/root/config.yml`はログ出力設定ファイル）
+- 環境構築はdocker-composeを使用 (分析用【`scraping`】とスクレイピング用【`analysis`】のコンテナ立ち上げ)
+- 作業用ディレクトリ: `root` (コンテナ内の`root`にマウント)
+- 分析notebook:　`analysis/root/hpb_analysis.ipynb`
+- スクレイピングソース: `scraping/root/hpb_scraping.py`
+- サンプルファイル取得時のログ情報: `scraping/root/log/scraping.log`
+- ログ出力設定ファイル: `scraping/root/config.yml`
